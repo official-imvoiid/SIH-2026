@@ -1,59 +1,33 @@
-# Data (large; downloaded via scripts/fetch_data.py)
-data/raw/*
-data/processed/*
-!data/**/.gitkeep
-
-# Model artifacts
-ml/artifacts/*
-!ml/artifacts/.gitkeep
-*.pkl
-*.joblib
-*.pt
-*.pth
-*.onnx
+# Dependencies
+node_modules/
+dist/
+build/
 
 # Python
 __pycache__/
-*.py[cod]
+*.pyc
+*.pyo
+.pytest_cache/
 .venv/
 venv/
-env/
-*.egg-info/
-.pytest_cache/
-.ipynb_checkpoints/
-.mypy_cache/
-.ruff_cache/
 
-# Node
-node_modules/
-dist/
-.vite/
-*.local
+# ---------------------------------------------------------------------------------------
+# Everything under data/ is fetched or derived, and none of it belongs in version control.
+#
+#   chain/blocks/   raw blocks from the public explorers. Two days is roughly 280 MB and
+#                   it is a cache: deleting it costs a re-fetch, nothing more.
+#   chain/*.json    the analysed window and its model output. window.json alone is ~190 MB
+#                   for a two-day range, which is far past what git should carry, and it
+#                   is reproducible from the blocks by one command.
+#   models/         trained weights. Committing these freezes a model to whatever data it
+#                   happened to see, which is the opposite of a reproducible pipeline.
+#   sources.json    holds an API key when one is configured. It must never be committed.
+# ---------------------------------------------------------------------------------------
+data/
 
-# Env / secrets
-.env
-.env.*
-!.env.example
-
-# OS / editors
+# Editors and operating systems
 .DS_Store
 Thumbs.db
+.vscode/
 .idea/
-.vscode/*
-!.vscode/extensions.json
-
-# Stray archives (keep the repo clean for GitHub)
-*.zip
-
-# Blockchain crawl cache -- 392 MB, regenerable via ml.experiments.real_vs_control.
-# Carry it on a USB drive if you want the experiment to stay offline on a new machine.
-data/raw/chain_cache/
-
-# Small fetched reference data IS committed (few hundred KB, keeps the repo offline-capable):
-!data/raw/ofac_btc.txt
-!data/raw/ransomwhere.json
-!data/raw/control_addresses.json
-
-# Archives / editor noise
-*.zip
-.pytest_cache/
+*.swp
