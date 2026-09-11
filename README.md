@@ -1,340 +1,249 @@
 # ChainTrace
 
-**Entity-level illicit actor detection on the Bitcoin transaction graph, with evidence an investigator can put in a case file.**
+AI-powered monitoring and analysis of Bitcoin transaction traffic.
 
-Built for SIH problem statement **SIH26146 — AI-Powered Monitoring & Analysis of Bitcoin Transaction Traffic**.
+A desktop application that pulls real blocks from the public chain, finds behaviour that
+looks like money laundering, and follows the money forward until it reaches somewhere it
+can stop being anonymous.
 
-```bash
-git clone <this repo> && cd SIH-2026
-pip install -r requirements.txt
-python run.py
-```
+Built with **Node** for the graph work, **Python** for the learning, and **Electron** for
+the desktop shell.
 
-That is the whole setup. It builds the dataset, trains the model, and serves the
-investigator UI at **http://localhost:8000** in about a minute. **No download, no API key,
-no network call at any point** — it runs air-gapped.
+There is no sample data in this build. Every number the interface shows came from a block
+it fetched, or from a model trained on one.
 
 ---
 
-## The problem
+## Running it
 
-Ransomware crews are paid in Bitcoin. Every payment is public, so police *can* see the
-money move. What they cannot cheaply do is answer the three questions a case actually
-turns on:
+```bash
+npm install
+python -m pip install -r python/requirements.txt
+npm start
+```
 
-1. Which **addresses belong to the same real-world actor**? One crew uses hundreds.
-2. Which of those actors are **likely criminal**, and how confident are we?
-3. **Why** — in language that survives a courtroom, not a softmax score?
+The window opens on an empty state, because nothing has been ingested yet. Two commands
+fill it:
+
+```bash
+node scripts/ingest.js --days 2
+python python/pipeline.py
+```
+
+Or use the **Source** and **Model** screens inside the app, which run the same two stages
+and stream their output into the window.
+
+| Command | What it does |
+|---|---|
+| `npm start` | the desktop application |
+| `npm run serve` | the local API and interface only, no Electron |
+| `npm run ingest` | pull the configured window of blocks |
+| `npm run analyse` | cluster, train, and score |
+| `npm run trace -- <address>` | follow one address to its endpoint, from the terminal |
+
+---
 
 ## What it does
 
+**1. Pull whole blocks, not individual addresses.**
+
+One `rawblock` request returns about 4,900 transactions and 5,400 addresses in a single
+8 MB response. Fetching address by address instead would need tens of thousands of requests
+for the same window, and gets rate-limited after about forty. Two days of Bitcoin is
+roughly 288 requests this way.
+
+Measured on a 2-day window: **1,399,931 transactions, 1,143,090 distinct addresses,
+2,845,537 value-flow edges.** Blocks are reduced to the fields the analysis reads and
+cached on disk, so a window is fetched once and re-analysed forever.
+
+**2. Extract the behaviour laundering produces.**
+
+| Pattern | What it looks for |
+|---|---|
+| High-velocity layering | money arrives, splits several ways, and leaves within minutes |
+| Fan-in collection | many unrelated senders pay one address, which sweeps it onward |
+| Peel chain | the bulk forwards to a fresh address, a little peels off, repeatedly |
+| Pass-through | nothing is retained |
+
+The peel detector requires a genuine multi-hop sequence. An earlier version tested only the
+*shape* of a single transaction and flagged 904 addresses out of 7,553, because two outputs
+where one takes 85% is simply what an ordinary payment with change looks like. Requiring
+three consecutive hops took that to 5.
+
+**3. Cluster behaviour with HDBSCAN.**
+
+Not k-means: the number of behaviour types in a window is unknown, and most addresses
+belong to no interesting group at all. HDBSCAN infers the count from density and marks
+genuinely unusual points as noise rather than forcing them into the nearest blob. Here the
+noise label is a finding, not a failure.
+
+Features are log-scaled and standardised first, because holding time and transaction
+frequency span four orders of magnitude, and on raw values the distance metric collapses
+onto whichever has the largest units.
+
+**4. Train a graph neural network.**
+
+A 4-layer GraphSAGE network in PyTorch Geometric, so risk propagates four hops along the
+actual money flow. GraphSAGE rather than plain GCN deliberately: GCN's symmetric averaging
+blurs the line between a criminal and someone merely paid by one.
+
+**5. Trace to an endpoint.**
+
+Value-weighted best-first search, not breadth-first. Blind BFS fails past about three hops
+because node counts multiply roughly tenfold per hop and almost all of it is dust and
+unrelated traffic. This follows the largest remaining flow first, prunes branches carrying
+a negligible share, and treats an entire peel chain as one logical hop rather than hundreds.
+
+It stops at one of four outcomes and names which:
+
+- **Service** — an exchange or custodial business. The win, because such a business is
+  legally required to hold identity documents.
+- **Dormant** — received and never spent. Parked, not lost.
+- **Mixer** — the trail genuinely ends.
+- **Horizon** — ran out of hops or budget. An unfinished trace, labelled as such.
+
+---
+
+## What it cannot do
+
+It cannot name a person. Nothing that reads the blockchain can, because the blockchain
+contains no names. It finds the doorway where the off-chain world holds that name, and
+assembles the evidence needed to justify asking for it.
+
+---
+
+## Configuring the data source
+
+The **Source** screen sets all of this and writes it to `data/chain/sources.json`:
+
+- **Which API.** Presets are marked verified or unreachable based on what actually answered
+  from this machine. `blockchain.info` and `blockstream.info` both work with no account and
+  no key. `mempool.space` timed out here and is labelled accordingly.
+- **A custom endpoint.** Paste a URL template using `{hash}`, `{height}`, `{address}`,
+  `{offset}`, `{key}`. This is how a paid provider attaches later without touching code.
+- **How much chain.** In days or in blocks, any value, with an optional end height. Nothing
+  about the window is hardcoded.
+
+---
+
+## Hardware
+
+Device selection is measured at runtime, never assumed:
+
 ```
-transactions ──▶ address clustering ──▶ entity graph ──▶ risk model ──▶ evidence
-                 (co-spend heuristic)   (actors, not      (forest +     (attribution +
-                                         tx hashes)        typologies)   FATF red flags)
+torch.cuda.is_available()   ->  use the GPU when one exists
+torch.cuda.mem_get_info()   ->  size batches from FREE VRAM, not total
 ```
 
-Only **stage 3** involves machine learning. Stages 1, 2 and 4 are deterministic graph
-algorithms, so most of the product keeps working even if the model is broken or drifting.
+Batch size is derived from what the card actually has spare, so the same code fills a 6 GB
+card or a 24 GB one with no constant to edit. When a window is too large for full-graph
+training it switches to neighbour-sampled mini-batches, so memory scales with the batch
+rather than the dataset, and a bigger window costs more steps instead of more VRAM.
 
-## Real Bitcoin data
+The interface reports the real device. On a machine with no CUDA it says CPU, and means it.
 
-The bundled demo dataset is synthetic, which invites a fair objection: *you planted the
-patterns, then found them.* So the repo also runs against the real blockchain.
+Full-graph GraphSAGE across 647,542 nodes took **168 minutes on CPU**. It is a GPU job.
+
+---
+
+## Reading the numbers honestly
+
+**Scores rank what to examine first. They are not probabilities of criminality.**
+
+There is no ground truth for a random slice of Bitcoin; nobody has labelled these
+addresses. Training labels come from the behavioural rules and the clustering,
+cross-referenced against OFAC sanctions and Ransomwhere confirmed ransomware where those
+intersect. So the network learns to *spread* those signals across graph structure, which is
+more than the rules do alone. It has not learned what a criminal is from verified examples,
+and any reported accuracy is agreement with those weak labels.
+
+A concrete illustration from a real 2-day run. The model reported an F1 of 0.9541, and its
+top twenty addresses were all Taproot, all between 0.3305 and 0.3321 BTC, all one-in
+one-out, all scoring 0.999989 identically. That is one homogeneous batch, almost certainly
+an inscription mint, not laundering. The plumbing was correct and the ranking was real; the
+labels were the weak part.
+
+To get detection rather than ranking, supply confirmed labels:
 
 ```bash
-python -m ml.ingest.real                      # real ransomware + sanctions lists
-python -m ml.experiments.real_vs_control      # the experiment below
+node scripts/trace.js --fetch-labels
 ```
 
-| Source | What it is |
-|---|---|
-| [Ransomwhere](https://ransomwhe.re) | **8,248 real Bitcoin addresses** that received real ransom payments, labelled by the family that collected them — Locky, Conti, Ryuk, NetWalker, SamSam, and 100+ more |
-| [OFAC SDN](https://github.com/0xB10C/ofac-sanctioned-digital-currency-addresses) | 532 Bitcoin addresses sanctioned by the US Treasury |
-| [mempool.space](https://mempool.space) | The live Bitcoin blockchain — real transactions, inputs, outputs, timestamps |
-
-**The experiment.** Two groups of real Bitcoin addresses, treated identically: one seeded
-from real ransomware wallets, one from ordinary wallets in recent blocks. Same crawl, same
-clustering, same rules. The only difference is seed selection — so any difference in how
-often the rules fire is a property of criminal money, not of our code.
-
-Fetching happens **once** and caches to `data/raw/`; every later run is fully offline.
-
-### The result: one rule of seven transfers to real data
-
-1,000 real addresses crawled (500 per group), ~15,000 real Bitcoin transactions.
-
-**Two measurements, and they disagree — both are reported because the disagreement is the
-finding.**
-
-#### Measurement 1 — whole crawled neighbourhoods
-
-Measured over every entity we retrieved history for:
-
-| | Ransomware | Control | Ratio |
-|---|---|---|---|
-| Observed entities | 342 | 74 | |
-| **Has ≥1 structural typology** | **67.5%** | **63.5%** | 1.1x |
-| Has ≥2 structural typologies | 9.9% | 13.5% | 0.7x |
-| — rapid pass-through | 49.7% | 37.8% | 1.3x |
-| — fan-out | 9.4% | 29.7% | **0.3x** |
-| — dormant-then-burst | 7.9% | 0.0% | — |
-
-Barely any separation. But this measurement has a flaw, and finding it mattered more than
-the number did.
-
-#### The flaw: a crawled neighbourhood is not a criminal
-
-Measurement 1 counts *every entity in the ransomware crawl* as ransomware. But crawling one
-hop out from a ransom wallet also collects **the victims who paid in and the exchanges the
-money was cashed out to**. Most of that neighbourhood is innocent, so the "criminal" class
-was heavily contaminated and no rule could have separated it.
-
-#### Measurement 2 — confirmed ransom wallets only
-
-Positives relabelled as **only entities containing a Ransomwhere-confirmed ransom address**.
-Thresholds fitted on some ransomware families, scored on **held-out families the
-calibration never saw**, using Youden's J (true-positive rate minus false-positive rate):
-
-| Rule | Catches ransom | Flags ordinary | J |
-|---|---|---|---|
-| **`rapid_passthrough`** | **80%** | 50% | **+0.300** |
-| fan_in | 20% | 25% | −0.050 |
-| fan_out | 0% | 6% | −0.062 |
-| structuring | 0% | 6% | −0.062 |
-| peel_chain | 0% | 0% | 0.000 |
-| dormant_burst | 7% | 6% | +0.004 |
-
-**One rule of seven separates real criminal money. Six do not.**
-
-The result is stable as the sample grows, which is the main reason to trust it: at 7
-held-out wallets it was 71% / 43% (J = +0.286); at 15 it is 80% / 50% (J = +0.300).
-
-**What J = +0.30 actually means.** Pass-through is a **triage filter, not a detector**. A
-50% false-positive rate is far too high to accuse anyone of anything. What it does is
-roughly halve the search space while retaining 80% of the targets — genuinely useful to an
-analyst working a queue, and worthless as standalone evidence. We say it that way in the
-UI and in the case pack.
-
-**Threshold tuning did not help.** For every rule, the swept thresholds failed to beat the
-original defaults on held-out families. The code keeps the defaults and records this.
-
-#### Why the other six fail
-
-1. **Thresholds were tuned on synthetic data.** Real Bitcoin is far busier than the
-   generated world, so `FAN_MIN_COUNTERPARTIES = 10` is meaningless where ordinary wallets
-   touch hundreds.
-2. **Exchanges are structurally identical to launderers.** They legitimately receive from
-   thousands and pay out to thousands. Fan-out fires **3x more** on ordinary money.
-   `is_service_like()` in `ml/typology/rules.py` is a structural stand-in for the exchange
-   tag list that commercial tools use; a real tag list would do this properly.
-
-**An incidental real finding:** 500 ransomware addresses formed **342** entities, while 500
-ordinary addresses collapsed into **74**. Ordinary users reuse addresses about 7x more
-heavily than criminals do. A usable signal we were not looking for.
-
-**Five OFAC-sanctioned addresses appeared in the crawl**, found by cross-referencing the US
-Treasury list against clustered entities.
-
-### What this means for the project
-
-Clustering, the pipeline, the explanation layer, the case pack and the UI all work on real
-data. Of the detection rules, one is validated and six are not — and the interface says so
-per flag, with three states: `real-data validated`, `not validated`, `untested`.
-
-Presenting this honestly is stronger than hiding it. "We tested our own detector against
-real criminal money, six of seven rules failed, we found the labelling flaw that hid the
-seventh, and it survived on crews it had never seen" demonstrates more competence than an
-unverified 98.5%.
-
-## Measured results
-
-Everything below is printed by the pipeline on every run — reproduce it with
-`python run.py --rebuild`. Numbers are from the **bundled synthetic dataset**; see
-[Datasets](#datasets) before quoting them anywhere.
-
-### Address clustering — turning wallets into actors
-
-| Metric | Value | Reading |
-|---|---|---|
-| Pair precision | **1.0000** | Never invents a link between unrelated parties |
-| **False merges** | **0** | of 17,283 clusters — the CoinJoin guard holds |
-| Pair recall | 0.3379 | Under-merges, **by design** — see below |
-| Addresses → entities | 35,317 → 17,283 | |
-
-Co-spend clustering deliberately trades recall for precision. Two addresses of the same
-owner that never co-spent stay separate; that costs recall. A *false merge* would invent a
-connection between innocent people, so precision is the number that must not move.
-
-### Risk model — held-out test period
-
-| Metric | Value |
-|---|---|
-| Illicit **F1** | **0.846** |
-| Illicit precision | 0.971 |
-| Illicit recall | 0.750 |
-| Average precision | 0.845 |
-| Precision @ top-50 | 1.000 |
-| Confusion | tp 66 · fp 2 · fn 22 · tn 2,456 |
-
-`RandomForestClassifier(400)` + Platt calibration, 23 features,
-**trains in under a second**. Guilt-by-association features are excluded — measured to
-cost ~8 F1 points, see the benchmark section below.
-
-> **This is synthetic data and therefore NOT comparable to the literature.** Weber et al.
-> (2019) report ~0.79 illicit-F1 for Random Forest on the *real* Elliptic dataset (~0.65
-> for a GCN). Ours is a generated world tuned by us; a higher number here means nothing
-> about the real problem. Do not claim we beat them.
-
-**Accuracy is never reported.** At a 1.97% illicit base rate, "everything is clean" scores
-98% and is worthless.
-
-### Concept drift — the honest result
-
-| Period | Illicit F1 |
-|---|---|
-| Before time step 43 | **1.000** |
-| After time step 43 | **0.733** |
-
-The illicit population changes behaviour at step 43 (mirroring the real dark-market
-shutdown in Elliptic). Performance falls off a cliff. We put this on screen instead of
-hiding it — knowing where your model fails is the point.
-
-### Typology engine — no machine learning at all
-
-Against a 6.98% base rate among labelled entities:
-
-| Rule hits | Precision | Recall |
-|---|---|---|
-| ≥1 structural typology | 0.574 | 0.779 |
-| ≥2 structural typologies | 0.985 | 0.376 |
-
-### Does graph structure help? Mostly not — and association features actively hurt
-
-`python -m ml.train.benchmark`, five models, identical temporal split, only the inputs vary:
-
-| Arm | Illicit F1 |
-|---|---|
-| **behaviour only** | **0.843** |
-| behaviour + label-free graph structure | 0.838 |
-| everything, incl. guilt-by-association | 0.755 |
-| learned spectral embeddings only | 0.271 |
-| everything + embeddings | 0.512 |
-
-**Dropping guilt-by-association features raises F1 by ~8 points.** They are fitted to the
-training period's criminal population, which changes by test time. They are now excluded
-from the model, which lifted the headline test F1 from 0.766 to **0.846**.
-
-The project already put conduct above association in explanations for *ethical* reasons.
-It turns out that choice is also the more accurate one — which is a far stronger claim than
-either half alone.
-
-*(These are spectral embeddings, not a GNN. A real GNN comparison needs the real Elliptic
-dataset; benchmarking one on a generated world would measure the generator.)*
-
-> **These numbers are synthetic and do NOT transfer.** On real Bitcoin only one of the
-> seven rules separates criminal money from ordinary money — see
-> [the real-data result](#the-result-one-rule-of-seven-transfers-to-real-data) above. They
-> are kept here because the gap between the two is the point: it is what measuring against
-> your own generator looks like. **Do not put 98.5% on a slide.**
-
-## Why the explanation layer is the point
-
-A model that says `0.93` is not evidence. The tool produces this instead:
-
-> Entity **E-06641** is flagged with a model risk score of 1.00. Primary indicator —
-> Rapid pass-through (VA-PASSTHROUGH): forwarded 100.0% of 62.2336 BTC received within 1
-> time step of receipt, retaining effectively no balance. Wallets that hold no position
-> are characteristic laundering intermediaries rather than end users. Additional conduct
-> indicators: Peel chain (VA-PEELCHAIN). Corroborating context: Direct exposure to known
-> illicit entities (VA-PROXIMITY). *Risk scores reflect heuristic dataset labels and
-> structural pattern matching; they indicate investigative priority, not proof of criminal
-> conduct.*
-
-Three things are deliberate there, and each is enforced by a test:
-
-- **Conduct outranks association.** Indicators about an entity's *own* behaviour always
-  lead; guilt-by-association is demoted to "corroborating context" and can never be the
-  headline. `test_corroborating_typologies_never_lead`
-- **The caveat is not optional.** No risk score reaches a user without it.
-  `test_narrative_carries_the_not_proof_caveat`
-- **Exculpatory evidence survives.** Negative feature contributions are shown, not
-  filtered out.
-
-Each code (`VA-PASSTHROUGH`, `VA-PEELCHAIN`, …) maps to a published **FATF virtual-asset
-red-flag indicator**, so a flag reads as an investigative finding rather than an opaque
-score.
-
-## Honest limitations
-
-Read these before demoing. Several will be asked about.
-
-- **The bundled data is synthetic.** It is Bitcoin-*shaped* — same class balance, real
-  CoinJoins, planted laundering typologies, a genuine behavioural regime change — but it
-  is not real Bitcoin. Any number from it must say so. The real-data path above
-  (`ml/ingest/real.py`) is what removes the circularity; use it for anything you claim.
-- **Only positive labels exist on real data.** There is no public list of confirmed-clean
-  Bitcoin addresses, so a supervised model trained on real data would have no trustworthy
-  negatives. That is precisely why the real experiment tests the **rule engine**, which
-  needs no labels, rather than the classifier.
-- **Address history is truncated.** `mempool.space` returns roughly the 50 most recent
-  transactions per address, so very busy wallets are partially observed. The crawl report
-  counts how many addresses this affected.
-- **A cluster is not a gang.** It is a set of co-controlled addresses. Attaching a *name*
-  needs off-chain intelligence (exchange KYC, sanctions lists) that no public dataset has.
-- **Labels are heuristic vendor labels**, not convictions. We predict investigative
-  priority, not guilt.
-- **CoinJoin detection is a heuristic.** It scores 0 false merges here; it will not be
-  perfect on real mainnet data.
-- **Elliptic's own features are anonymised**, so explanations over them name columns
-  without semantics. ChainTrace's 27 features are all self-derived and named, which is why
-  the attribution panel is readable at all.
-
-## Datasets
-
-The tool ships with a synthetic generator so six people can start on day one without a
-Kaggle account. To use real data, see [`data/README.md`](data/README.md) — Elliptic,
-Elliptic++ (wallet-level, the one that matters), and BABD-13, with licences.
-
-> **Elliptic is CC BY-NC-SA 4.0 — non-commercial.** Put that on the data slide.
->
-> **Elliptic is transaction-level, not wallet-level.** Its nodes are transactions and only
-> ~23% carry a label. Wallet-level attribution needs Elliptic++; grouping addresses into
-> actors needs the clustering in this repo.
-
-## Architecture
-
-| Path | What lives there | Runs without data? |
-|---|---|---|
-| [`ml/data/synth.py`](ml/data/synth.py) | Synthetic Bitcoin world generator | yes |
-| [`ml/ingest/real.py`](ml/ingest/real.py) | **Real** ransomware wallets + live blockchain | after first fetch |
-| [`ml/experiments/real_vs_control.py`](ml/experiments/real_vs_control.py) | **The non-circular experiment** | after first fetch |
-| [`ml/features/clustering.py`](ml/features/clustering.py) | Co-spend union-find + CoinJoin guard | yes |
-| [`ml/features/graph.py`](ml/features/graph.py) | Entity features, leak-safe by construction | — |
-| [`ml/typology/rules.py`](ml/typology/rules.py) | 7 FATF red-flag detectors | **yes** |
-| [`ml/train/baseline.py`](ml/train/baseline.py) | Forest + temporal split + drift report | — |
-| [`ml/explain/attribution.py`](ml/explain/attribution.py) | Exact tree-path attribution (SHAP if installed) | — |
-| [`backend/app/`](backend/app/) | FastAPI, in-memory store, 300-node subgraph cap | — |
-| [`frontend/public/index.html`](frontend/public/index.html) | Investigator UI — **zero dependencies** | yes |
-
-The UI is hand-written canvas with a Fruchterman-Reingold layout and no graph library, so
-there is nothing to fetch from a CDN and nothing to `npm install`. That is a deliberate
-trade for air-gapped operation.
-
-```bash
-python -m pytest backend/tests/ -q      # 62 tests, ~5s, no dataset needed
+---
+
+## Layout
+
+```
+electron/
+  main.js            app lifecycle, window, menus, background stages
+  preload.js         the complete list of what the page may do natively
+src/
+  chain/
+    blocks.js        block-range fetcher, reduction, disk cache
+    client.js        multi-provider address lookups with failover
+    fetch.js         Ransomwhere and OFAC label sources
+    model.js         satoshi-integer money, address validation, provenance
+    providers.js     provider pool and rate-limit benching
+    sources.js       which API and which window, read from config not code
+  analysis/
+    behavior.js      behavioural features, peel-chain detection
+    trace.js         value-weighted endpoint tracer
+  core/
+    unionfind.js     disjoint set union, path compression + union by rank
+  server/
+    app.js           local API, bound to 127.0.0.1 only
+python/
+  pipeline.py        HDBSCAN, weak labels, GraphSAGE, VRAM planning
+  metrics.py         illicit F1, AUC-PR, precision@k, Youden's J
+scripts/
+  ingest.js          pull blocks, build features, write the window
+  trace.js           follow one address from the terminal
+ui/
+  index.html         the investigation console
+  console.js         interface logic, no framework
+  plot.js            canvas money-flow graph, no library
+  app.css            styling
 ```
 
-## Documentation
+---
 
-| Doc | Contents |
-|---|---|
-| [`docs/EXPLAIN.md`](docs/EXPLAIN.md) | **The project explained from zero** — start here |
-| [`docs/RESEARCH.md`](docs/RESEARCH.md) | Papers and datasets, with the numbers to beat |
-| [`docs/TEAM.md`](docs/TEAM.md) | Work split, sprint plan, frozen interface contracts |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Module boundaries and design decisions |
-| [`data/README.md`](data/README.md) | Dataset provenance and licences |
+## Design notes
+
+**Money is integer satoshis, never floating-point BTC.** `0.1 + 0.2` does not equal `0.3`
+in binary floating point, and across a million transactions those errors accumulate into
+balances that are visibly wrong. BTC exists only for display, produced at the last moment.
+
+**Every record carries its provenance.** Source, endpoint, block height, ingestion time. A
+number on screen must be traceable to the block it came from, or a user cannot tell a real
+balance from an invented one.
+
+**The interface has no synthetic fallback.** When nothing is ingested it shows an empty
+state and the two commands that fix it. A console that invents numbers to fill itself is
+worse than one that shows none.
+
+**No graph library in the renderer.** Cytoscape or d3 would be a few hundred kilobytes from
+a CDN, and this has to work with the network cable pulled out. The force simulation and the
+arrows are about three hundred lines on a canvas, with repulsion on a spatial hash so a few
+hundred nodes stay smooth.
+
+**Complexity, since it decides what is possible.** Union-Find is O(α(n)) per operation,
+effectively constant. Feature extraction is one pass over transactions, O(E). GNN training
+is O(L·E·d) per epoch, scaling with edges rather than node pairs. Nothing materialises an
+n-by-n matrix, which is what makes a million-address window feasible at all.
+
+---
+
+## Known limits
+
+- Exit points are identified structurally, from in-degree and out-degree inside the window.
+  An exchange and a large laundering operation genuinely look alike by shape. A maintained
+  tag list is what separates them, and this build does not carry one.
+- Analysis covers only the blocks loaded. A clean result is not proof that nothing happened.
+- Clustering assigns behaviour, not ownership. Two addresses in one cohort act alike; that
+  is not a claim they share an owner.
+- Public explorers rate-limit. The client rotates providers and backs off, but a large
+  first fetch takes time.
 
 ## Licence
 
-MIT — see [`LICENSE`](LICENSE). Datasets carry their own licences; see `data/README.md`.
+MIT.
