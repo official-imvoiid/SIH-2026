@@ -1,0 +1,296 @@
+[
+  {
+    "ts": 1,
+    "n_txs": 3,
+    "volume_btc": 4.682066,
+    "n_illicit": 0
+  },
+  {
+    "ts": 2,
+    "n_txs": 1,
+    "volume_btc": 40.0,
+    "n_illicit": 0
+  },
+  {
+    "ts": 3,
+    "n_txs": 3,
+    "volume_btc": 5.04753,
+    "n_illicit": 0
+  },
+  {
+    "ts": 4,
+    "n_txs": 3,
+    "volume_btc": 1.317513,
+    "n_illicit": 0
+  },
+  {
+    "ts": 5,
+    "n_txs": 5,
+    "volume_btc": 6.312114,
+    "n_illicit": 0
+  },
+  {
+    "ts": 6,
+    "n_txs": 3,
+    "volume_btc": 1.530186,
+    "n_illicit": 0
+  },
+  {
+    "ts": 7,
+    "n_txs": 6,
+    "volume_btc": 7.604014,
+    "n_illicit": 0
+  },
+  {
+    "ts": 8,
+    "n_txs": 3,
+    "volume_btc": 3.535266,
+    "n_illicit": 0
+  },
+  {
+    "ts": 9,
+    "n_txs": 5,
+    "volume_btc": 5.999208,
+    "n_illicit": 0
+  },
+  {
+    "ts": 10,
+    "n_txs": 22,
+    "volume_btc": 5.558949,
+    "n_illicit": 20
+  },
+  {
+    "ts": 11,
+    "n_txs": 7,
+    "volume_btc": 7.673896,
+    "n_illicit": 0
+  },
+  {
+    "ts": 12,
+    "n_txs": 3,
+    "volume_btc": 4.325944,
+    "n_illicit": 0
+  },
+  {
+    "ts": 13,
+    "n_txs": 4,
+    "volume_btc": 4.810996,
+    "n_illicit": 0
+  },
+  {
+    "ts": 14,
+    "n_txs": 4,
+    "volume_btc": 7.394071,
+    "n_illicit": 0
+  },
+  {
+    "ts": 15,
+    "n_txs": 6,
+    "volume_btc": 6.241036,
+    "n_illicit": 0
+  },
+  {
+    "ts": 16,
+    "n_txs": 8,
+    "volume_btc": 10.122052,
+    "n_illicit": 0
+  },
+  {
+    "ts": 17,
+    "n_txs": 2,
+    "volume_btc": 2.586816,
+    "n_illicit": 0
+  },
+  {
+    "ts": 18,
+    "n_txs": 5,
+    "volume_btc": 5.478146,
+    "n_illicit": 1
+  },
+  {
+    "ts": 19,
+    "n_txs": 2,
+    "volume_btc": 1.36163,
+    "n_illicit": 0
+  },
+  {
+    "ts": 20,
+    "n_txs": 5,
+    "volume_btc": 5.113469,
+    "n_illicit": 1
+  },
+  {
+    "ts": 21,
+    "n_txs": 18,
+    "volume_btc": 4.122452,
+    "n_illicit": 0
+  },
+  {
+    "ts": 22,
+    "n_txs": 2,
+    "volume_btc": 0.314656,
+    "n_illicit": 0
+  },
+  {
+    "ts": 23,
+    "n_txs": 3,
+    "volume_btc": 1.8316,
+    "n_illicit": 0
+  },
+  {
+    "ts": 24,
+    "n_txs": 1,
+    "volume_btc": 0.415009,
+    "n_illicit": 0
+  },
+  {
+    "ts": 25,
+    "n_txs": 4,
+    "volume_btc": 11.349463,
+    "n_illicit": 0
+  },
+  {
+    "ts": 26,
+    "n_txs": 2,
+    "volume_btc": 2.585694,
+    "n_illicit": 0
+  },
+  {
+    "ts": 27,
+    "n_txs": 1,
+    "volume_btc": 0.236588,
+    "n_illicit": 0
+  },
+  {
+    "ts": 28,
+    "n_txs": 1,
+    "volume_btc": 1.157592,
+    "n_illicit": 0
+  },
+  {
+    "ts": 29,
+    "n_txs": 0,
+    "volume_btc": 0,
+    "n_illicit": 0
+  },
+  {
+    "ts": 30,
+    "n_txs": 7,
+    "volume_btc": 9.11232,
+    "n_illicit": 0
+  },
+  {
+    "ts": 31,
+    "n_txs": 3,
+    "volume_btc": 1.374069,
+    "n_illicit": 0
+  },
+  {
+    "ts": 32,
+    "n_txs": 3,
+    "volume_btc": 1.37672,
+    "n_illicit": 0
+  },
+  {
+    "ts": 33,
+    "n_txs": 6,
+    "volume_btc": 4.871794,
+    "n_illicit": 0
+  },
+  {
+    "ts": 34,
+    "n_txs": 4,
+    "volume_btc": 6.113917,
+    "n_illicit": 0
+  },
+  {
+    "ts": 35,
+    "n_txs": 6,
+    "volume_btc": 6.19614,
+    "n_illicit": 0
+  },
+  {
+    "ts": 36,
+    "n_txs": 6,
+    "volume_btc": 2.946987,
+    "n_illicit": 0
+  },
+  {
+    "ts": 37,
+    "n_txs": 5,
+    "volume_btc": 5.040757,
+    "n_illicit": 0
+  },
+  {
+    "ts": 38,
+    "n_txs": 5,
+    "volume_btc": 5.282902,
+    "n_illicit": 0
+  },
+  {
+    "ts": 39,
+    "n_txs": 5,
+    "volume_btc": 1.705673,
+    "n_illicit": 0
+  },
+  {
+    "ts": 40,
+    "n_txs": 0,
+    "volume_btc": 0,
+    "n_illicit": 0
+  },
+  {
+    "ts": 41,
+    "n_txs": 5,
+    "volume_btc": 4.766047,
+    "n_illicit": 0
+  },
+  {
+    "ts": 42,
+    "n_txs": 3,
+    "volume_btc": 2.235405,
+    "n_illicit": 0
+  },
+  {
+    "ts": 43,
+    "n_txs": 2,
+    "volume_btc": 2.827944,
+    "n_illicit": 0
+  },
+  {
+    "ts": 44,
+    "n_txs": 2,
+    "volume_btc": 10.781162,
+    "n_illicit": 0
+  },
+  {
+    "ts": 45,
+    "n_txs": 3,
+    "volume_btc": 12.643091,
+    "n_illicit": 0
+  },
+  {
+    "ts": 46,
+    "n_txs": 3,
+    "volume_btc": 11.52428,
+    "n_illicit": 0
+  },
+  {
+    "ts": 47,
+    "n_txs": 4,
+    "volume_btc": 10.859981,
+    "n_illicit": 0
+  },
+  {
+    "ts": 48,
+    "n_txs": 0,
+    "volume_btc": 0,
+    "n_illicit": 0
+  },
+  {
+    "ts": 49,
+    "n_txs": 3,
+    "volume_btc": 3.56217,
+    "n_illicit": 0
+  }
+]

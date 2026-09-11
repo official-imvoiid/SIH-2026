@@ -1,0 +1,59 @@
+# Data (large; downloaded via scripts/fetch_data.py)
+data/raw/*
+data/processed/*
+!data/**/.gitkeep
+
+# Model artifacts
+ml/artifacts/*
+!ml/artifacts/.gitkeep
+*.pkl
+*.joblib
+*.pt
+*.pth
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+.vite/
+*.local
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Stray archives (keep the repo clean for GitHub)
+*.zip
+
+# Blockchain crawl cache -- 392 MB, regenerable via ml.experiments.real_vs_control.
+# Carry it on a USB drive if you want the experiment to stay offline on a new machine.
+data/raw/chain_cache/
+
+# Small fetched reference data IS committed (few hundred KB, keeps the repo offline-capable):
+!data/raw/ofac_btc.txt
+!data/raw/ransomwhere.json
+!data/raw/control_addresses.json
+
+# Archives / editor noise
+*.zip
+.pytest_cache/

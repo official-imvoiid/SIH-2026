@@ -1,0 +1,1451 @@
+[
+  {
+    "src_entity": "E-00001",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.27788536,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00002",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.15500215,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00003",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.20500586,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00004",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.19464215,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00005",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.29729424,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00006",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.2853399,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00007",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.32843591,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00008",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.16738777,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00009",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.23438436,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00010",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.15595944,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00011",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.19372759,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00012",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.25107106,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00013",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.15530719,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00014",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.18976753,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00015",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.27997689,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00016",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.2589883,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00017",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.19408812,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00018",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.26785314,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00019",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.31188609,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00020",
+    "dst_entity": "E-00100",
+    "ts": 10,
+    "value_btc": 0.15129975,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00100",
+    "dst_entity": "E-00201",
+    "ts": 11,
+    "value_btc": 0.40997725,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00100",
+    "dst_entity": "E-00101",
+    "ts": 11,
+    "value_btc": 4.14532555,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00101",
+    "dst_entity": "E-00202",
+    "ts": 12,
+    "value_btc": 0.3730793,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00101",
+    "dst_entity": "E-00102",
+    "ts": 12,
+    "value_btc": 3.77224625,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00102",
+    "dst_entity": "E-00203",
+    "ts": 13,
+    "value_btc": 0.33950216,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00102",
+    "dst_entity": "E-00103",
+    "ts": 13,
+    "value_btc": 3.43274409,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00103",
+    "dst_entity": "E-00204",
+    "ts": 14,
+    "value_btc": 0.30894697,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00103",
+    "dst_entity": "E-00104",
+    "ts": 14,
+    "value_btc": 3.12379712,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00104",
+    "dst_entity": "E-00205",
+    "ts": 15,
+    "value_btc": 0.28114174,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00104",
+    "dst_entity": "E-00105",
+    "ts": 15,
+    "value_btc": 2.84265538,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00105",
+    "dst_entity": "E-00206",
+    "ts": 16,
+    "value_btc": 0.25583898,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00105",
+    "dst_entity": "E-00106",
+    "ts": 16,
+    "value_btc": 2.58681639,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00106",
+    "dst_entity": "E-00207",
+    "ts": 17,
+    "value_btc": 0.23281348,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00106",
+    "dst_entity": "E-00107",
+    "ts": 17,
+    "value_btc": 2.35400292,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00107",
+    "dst_entity": "E-00208",
+    "ts": 18,
+    "value_btc": 0.21186026,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00107",
+    "dst_entity": "E-00108",
+    "ts": 18,
+    "value_btc": 2.14214266,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00108",
+    "dst_entity": "E-00300",
+    "ts": 20,
+    "value_btc": 2.14214266,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00301",
+    "ts": 21,
+    "value_btc": 0.15154429,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00302",
+    "ts": 21,
+    "value_btc": 0.14846875,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00303",
+    "ts": 21,
+    "value_btc": 0.13824676,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00304",
+    "ts": 21,
+    "value_btc": 0.13296935,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00305",
+    "ts": 21,
+    "value_btc": 0.15586839,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00306",
+    "ts": 21,
+    "value_btc": 0.13814234,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00307",
+    "ts": 21,
+    "value_btc": 0.13117756,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00308",
+    "ts": 21,
+    "value_btc": 0.13129096,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00309",
+    "ts": 21,
+    "value_btc": 0.15273461,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00310",
+    "ts": 21,
+    "value_btc": 0.14577212,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00311",
+    "ts": 21,
+    "value_btc": 0.15158168,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00312",
+    "ts": 21,
+    "value_btc": 0.14937109,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00313",
+    "ts": 21,
+    "value_btc": 0.14384425,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00314",
+    "ts": 21,
+    "value_btc": 0.1563226,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00300",
+    "dst_entity": "E-00315",
+    "ts": 21,
+    "value_btc": 0.13934022,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00050",
+    "dst_entity": "E-00400",
+    "ts": 25,
+    "value_btc": 5.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00400",
+    "dst_entity": "E-00401",
+    "ts": 25,
+    "value_btc": 4.96,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00051",
+    "dst_entity": "E-00500",
+    "ts": 30,
+    "value_btc": 5.2,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00501",
+    "ts": 30,
+    "value_btc": 0.50020816,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00502",
+    "ts": 31,
+    "value_btc": 0.50131762,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00503",
+    "ts": 32,
+    "value_btc": 0.50047408,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00504",
+    "ts": 33,
+    "value_btc": 0.50144683,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00505",
+    "ts": 34,
+    "value_btc": 0.50030941,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00506",
+    "ts": 35,
+    "value_btc": 0.50081829,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00507",
+    "ts": 36,
+    "value_btc": 0.4981833,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00508",
+    "ts": 37,
+    "value_btc": 0.49891159,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00509",
+    "ts": 38,
+    "value_btc": 0.49915755,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00500",
+    "dst_entity": "E-00510",
+    "ts": 39,
+    "value_btc": 0.49831917,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00052",
+    "dst_entity": "E-00600",
+    "ts": 2,
+    "value_btc": 40.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00053",
+    "dst_entity": "E-00600",
+    "ts": 3,
+    "value_btc": 2.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00600",
+    "dst_entity": "E-00601",
+    "ts": 44,
+    "value_btc": 10.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00600",
+    "dst_entity": "E-00602",
+    "ts": 45,
+    "value_btc": 10.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00600",
+    "dst_entity": "E-00603",
+    "ts": 46,
+    "value_btc": 10.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00600",
+    "dst_entity": "E-00604",
+    "ts": 47,
+    "value_btc": 10.0,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00901",
+    "ts": 7,
+    "value_btc": 0.9565143,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00901",
+    "dst_entity": "E-00900",
+    "ts": 30,
+    "value_btc": 0.76646449,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00901",
+    "ts": 24,
+    "value_btc": 0.4150087,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00901",
+    "dst_entity": "E-00900",
+    "ts": 23,
+    "value_btc": 0.25931337,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00901",
+    "ts": 18,
+    "value_btc": 1.75753258,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00901",
+    "dst_entity": "E-00900",
+    "ts": 44,
+    "value_btc": 0.78116211,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 41,
+    "value_btc": 0.43613523,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 47,
+    "value_btc": 0.301325,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 30,
+    "value_btc": 0.95484405,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 41,
+    "value_btc": 0.82891273,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 15,
+    "value_btc": 1.71468948,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 4,
+    "value_btc": 0.28256721,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 3,
+    "value_btc": 2.01456404,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 26,
+    "value_btc": 0.32861164,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 14,
+    "value_btc": 2.28370895,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 37,
+    "value_btc": 1.05287748,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00902",
+    "ts": 21,
+    "value_btc": 0.53944009,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00902",
+    "dst_entity": "E-00900",
+    "ts": 32,
+    "value_btc": 0.48080196,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00903",
+    "ts": 10,
+    "value_btc": 0.66955161,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00903",
+    "dst_entity": "E-00900",
+    "ts": 16,
+    "value_btc": 0.89653689,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00903",
+    "ts": 35,
+    "value_btc": 0.66422661,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00903",
+    "dst_entity": "E-00900",
+    "ts": 38,
+    "value_btc": 0.51983625,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00903",
+    "ts": 38,
+    "value_btc": 1.00450726,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00903",
+    "dst_entity": "E-00900",
+    "ts": 15,
+    "value_btc": 1.19681768,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00903",
+    "ts": 9,
+    "value_btc": 1.27872047,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00903",
+    "dst_entity": "E-00900",
+    "ts": 6,
+    "value_btc": 0.90938077,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00903",
+    "ts": 8,
+    "value_btc": 0.39057489,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00903",
+    "dst_entity": "E-00900",
+    "ts": 11,
+    "value_btc": 0.95257444,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00904",
+    "ts": 39,
+    "value_btc": 0.16818399,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00904",
+    "dst_entity": "E-00900",
+    "ts": 25,
+    "value_btc": 0.71910723,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00904",
+    "ts": 30,
+    "value_btc": 1.32749472,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00904",
+    "dst_entity": "E-00900",
+    "ts": 36,
+    "value_btc": 1.03432785,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00904",
+    "ts": 1,
+    "value_btc": 1.70390569,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00904",
+    "dst_entity": "E-00900",
+    "ts": 8,
+    "value_btc": 0.82123534,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00904",
+    "ts": 35,
+    "value_btc": 1.87968572,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00904",
+    "dst_entity": "E-00900",
+    "ts": 42,
+    "value_btc": 0.41480881,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00904",
+    "ts": 19,
+    "value_btc": 1.09256547,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00904",
+    "dst_entity": "E-00900",
+    "ts": 30,
+    "value_btc": 0.01386193,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00905",
+    "ts": 33,
+    "value_btc": 1.90728588,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00905",
+    "dst_entity": "E-00900",
+    "ts": 33,
+    "value_btc": 1.09602713,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00905",
+    "ts": 41,
+    "value_btc": 0.75312753,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00905",
+    "dst_entity": "E-00900",
+    "ts": 41,
+    "value_btc": 0.61411883,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00905",
+    "ts": 13,
+    "value_btc": 0.39056978,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00905",
+    "dst_entity": "E-00900",
+    "ts": 49,
+    "value_btc": 0.20224335,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00905",
+    "ts": 34,
+    "value_btc": 2.2970488,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00905",
+    "dst_entity": "E-00900",
+    "ts": 39,
+    "value_btc": 0.39574571,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00906",
+    "ts": 8,
+    "value_btc": 2.32345555,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00906",
+    "dst_entity": "E-00900",
+    "ts": 20,
+    "value_btc": 0.29494825,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00906",
+    "ts": 16,
+    "value_btc": 2.1962439,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00906",
+    "dst_entity": "E-00900",
+    "ts": 6,
+    "value_btc": 0.11192761,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00907",
+    "ts": 5,
+    "value_btc": 2.44518139,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00907",
+    "dst_entity": "E-00900",
+    "ts": 35,
+    "value_btc": 0.92134297,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00907",
+    "ts": 9,
+    "value_btc": 1.65277955,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00907",
+    "dst_entity": "E-00900",
+    "ts": 36,
+    "value_btc": 0.20650108,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00907",
+    "ts": 34,
+    "value_btc": 2.18235827,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00907",
+    "dst_entity": "E-00900",
+    "ts": 28,
+    "value_btc": 1.15759186,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00907",
+    "ts": 35,
+    "value_btc": 1.89061034,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00907",
+    "dst_entity": "E-00900",
+    "ts": 45,
+    "value_btc": 0.24936977,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00907",
+    "ts": 20,
+    "value_btc": 1.00349083,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00907",
+    "dst_entity": "E-00900",
+    "ts": 43,
+    "value_btc": 0.78335489,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00908",
+    "ts": 34,
+    "value_btc": 1.13420049,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00908",
+    "dst_entity": "E-00900",
+    "ts": 16,
+    "value_btc": 0.27738983,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00908",
+    "ts": 22,
+    "value_btc": 0.06237531,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00908",
+    "dst_entity": "E-00900",
+    "ts": 36,
+    "value_btc": 0.28383653,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00908",
+    "ts": 15,
+    "value_btc": 0.02790519,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00908",
+    "dst_entity": "E-00900",
+    "ts": 46,
+    "value_btc": 0.76101252,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00908",
+    "ts": 15,
+    "value_btc": 0.17782682,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00908",
+    "dst_entity": "E-00900",
+    "ts": 3,
+    "value_btc": 1.03296613,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00908",
+    "ts": 5,
+    "value_btc": 1.29024874,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00908",
+    "dst_entity": "E-00900",
+    "ts": 18,
+    "value_btc": 0.80608356,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00909",
+    "ts": 35,
+    "value_btc": 0.3394565,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00909",
+    "dst_entity": "E-00900",
+    "ts": 37,
+    "value_btc": 0.69569186,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00909",
+    "ts": 16,
+    "value_btc": 1.96370237,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00909",
+    "dst_entity": "E-00900",
+    "ts": 27,
+    "value_btc": 0.2365878,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00909",
+    "ts": 7,
+    "value_btc": 1.65086705,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00909",
+    "dst_entity": "E-00900",
+    "ts": 23,
+    "value_btc": 0.51405856,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00910",
+    "ts": 47,
+    "value_btc": 0.14488626,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00910",
+    "dst_entity": "E-00900",
+    "ts": 42,
+    "value_btc": 1.1811566,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00910",
+    "ts": 7,
+    "value_btc": 0.16092556,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00910",
+    "dst_entity": "E-00900",
+    "ts": 47,
+    "value_btc": 0.4137701,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00910",
+    "ts": 7,
+    "value_btc": 0.62915427,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00910",
+    "dst_entity": "E-00900",
+    "ts": 13,
+    "value_btc": 0.64818005,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00910",
+    "ts": 9,
+    "value_btc": 1.06048528,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00910",
+    "dst_entity": "E-00900",
+    "ts": 18,
+    "value_btc": 0.5605274,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00910",
+    "ts": 5,
+    "value_btc": 1.11339556,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00910",
+    "dst_entity": "E-00900",
+    "ts": 36,
+    "value_btc": 0.12651139,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 1,
+    "value_btc": 2.42280068,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 49,
+    "value_btc": 1.01994792,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 11,
+    "value_btc": 1.021971,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 31,
+    "value_btc": 0.26435929,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 26,
+    "value_btc": 2.25708274,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 11,
+    "value_btc": 0.46097801,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 25,
+    "value_btc": 0.67035561,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 30,
+    "value_btc": 0.34944658,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 45,
+    "value_btc": 2.39372093,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 36,
+    "value_btc": 0.79762686,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00911",
+    "ts": 32,
+    "value_btc": 0.39544409,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00911",
+    "dst_entity": "E-00900",
+    "ts": 19,
+    "value_btc": 0.26906407,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00912",
+    "ts": 38,
+    "value_btc": 1.84198558,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00912",
+    "dst_entity": "E-00900",
+    "ts": 4,
+    "value_btc": 0.90009092,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00912",
+    "ts": 4,
+    "value_btc": 0.13485442,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00912",
+    "dst_entity": "E-00900",
+    "ts": 31,
+    "value_btc": 0.60839196,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 11,
+    "value_btc": 0.15163015,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 33,
+    "value_btc": 0.10533264,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 12,
+    "value_btc": 0.18061812,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 5,
+    "value_btc": 0.81350294,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 16,
+    "value_btc": 1.01540112,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 37,
+    "value_btc": 0.30299626,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 39,
+    "value_btc": 0.10895674,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 6,
+    "value_btc": 0.50887765,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 38,
+    "value_btc": 1.41741504,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 21,
+    "value_btc": 1.12230045,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00913",
+    "ts": 14,
+    "value_btc": 1.67761768,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00913",
+    "dst_entity": "E-00900",
+    "ts": 21,
+    "value_btc": 0.29403628,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00914",
+    "ts": 9,
+    "value_btc": 1.68250866,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00914",
+    "dst_entity": "E-00900",
+    "ts": 20,
+    "value_btc": 0.55409724,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00914",
+    "ts": 49,
+    "value_btc": 2.33997838,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00914",
+    "dst_entity": "E-00900",
+    "ts": 1,
+    "value_btc": 0.55535977,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00914",
+    "ts": 37,
+    "value_btc": 2.49028016,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00914",
+    "dst_entity": "E-00900",
+    "ts": 5,
+    "value_btc": 0.64978494,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00914",
+    "ts": 33,
+    "value_btc": 0.67034903,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00914",
+    "dst_entity": "E-00900",
+    "ts": 23,
+    "value_btc": 1.05822837,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00914",
+    "ts": 16,
+    "value_btc": 0.93012245,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00914",
+    "dst_entity": "E-00900",
+    "ts": 11,
+    "value_btc": 0.53143964,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 46,
+    "value_btc": 0.76326769,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 42,
+    "value_btc": 0.63943942,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 43,
+    "value_btc": 2.0445893,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 20,
+    "value_btc": 1.11878969,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 7,
+    "value_btc": 2.34793571,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 9,
+    "value_btc": 0.32471445,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 7,
+    "value_btc": 1.85861754,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 10,
+    "value_btc": 0.33409437,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 39,
+    "value_btc": 0.53446784,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 22,
+    "value_btc": 0.2522808,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00900",
+    "dst_entity": "E-00915",
+    "ts": 41,
+    "value_btc": 2.13375291,
+    "n_txs": 1
+  },
+  {
+    "src_entity": "E-00915",
+    "dst_entity": "E-00900",
+    "ts": 33,
+    "value_btc": 0.5913529,
+    "n_txs": 1
+  }
+]
