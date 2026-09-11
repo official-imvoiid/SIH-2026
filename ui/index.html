@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ChainTrace</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="identity">
+    <span class="glyph"></span>
+    <span class="wordmark">ChainTrace</span>
+  </div>
+
+  <div class="omnibox">
+    <input id="q" type="search" spellcheck="false" autocomplete="off"
+           placeholder="Paste a Bitcoin address to open it">
+  </div>
+
+  <div class="chips" id="chips"></div>
+</header>
+
+<!-- ---------------------------------------------------------------- no data --- -->
+<section id="cold" class="cold" hidden>
+  <div class="cold-inner">
+    <h1>Nothing ingested yet</h1>
+    <p>This console displays only blocks pulled from the public chain. No sample data
+       exists in this build, so there is nothing to show until a window is fetched.</p>
+    <ol class="steps">
+      <li>
+        <span class="step-n">1</span>
+        <div>
+          <strong>Pull a window of the chain</strong>
+          <code>node scripts/ingest.js --days 2</code>
+          <em id="cold-blocks"></em>
+        </div>
+      </li>
+      <li>
+        <span class="step-n">2</span>
+        <div>
+          <strong>Cluster and train</strong>
+          <code>python python/pipeline.py</code>
+          <em>HDBSCAN cohorts, then a 4-layer GraphSAGE network over the real graph.</em>
+        </div>
+      </li>
+      <li>
+        <span class="step-n">3</span>
+        <div>
+          <strong>Reload this page</strong>
+          <em>Findings appear here automatically.</em>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ------------------------------------------------------------------- main --- -->
+<main id="main" hidden>
+
+  <nav class="rail">
+    <button class="rail-btn is-on" data-screen="triage" title="Triage">
+      <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h10M4 18h6"/></svg><span>Triage</span>
+    </button>
+    <button class="rail-btn" data-screen="flow" title="Money flow">
+      <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="12" r="2.5"/><circle cx="7" cy="18" r="2.5"/><path d="M8.2 7.2 15.6 11M16 14.1 9.2 16.8"/></svg><span>Flow</span>
+    </button>
+    <button class="rail-btn" data-screen="trace" title="Trace to endpoint">
+      <svg viewBox="0 0 24 24"><path d="M4 18 10 8l4 5 6-9"/><circle cx="4" cy="18" r="1.6"/><circle cx="20" cy="4" r="1.6"/></svg><span>Trace</span>
+    </button>
+    <button class="rail-btn" data-screen="cohorts" title="Cohorts">
+      <svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.2"/><circle cx="11" cy="17" r="2.6"/></svg><span>Cohorts</span>
+    </button>
+    <button class="rail-btn" data-screen="sources" title="Data source">
+      <svg viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></svg><span>Source</span>
+    </button>
+    <button class="rail-btn" data-screen="model" title="Model">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 10v4M17 10v4"/></svg><span>Model</span>
+    </button>
+  </nav>
+
+  <section class="stage">
+
+    <!-- ================================================== TRIAGE -->
+    <div class="screen is-on" id="s-triage">
+      <div class="metrics" id="metrics"></div>
+      <div class="split">
+        <div class="col-list">
+          <div class="col-head">
+            <h2>Ranked addresses</h2>
+            <div class="filters">
+              <select id="f-pattern">
+                <option value="all">all patterns</option>
+                <option value="layering">layering</option>
+                <option value="fanin">fan-in</option>
+                <option value="peel">peel chain</option>
+              </select>
+              <select id="f-value">
+                <option value="0">any value</option>
+                <option value="0.01">≥ 0.01 BTC</option>
+                <option value="0.1">≥ 0.1 BTC</option>
+                <option value="1">≥ 1 BTC</option>
+              </select>
+            </div>
+          </div>
+          <p class="col-note" id="rank-note"></p>
+          <div class="rows" id="rows"></div>
+        </div>
+        <div class="col-detail" id="detail">
+          <p class="placeholder">Select an address.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================== FLOW -->
+    <div class="screen" id="s-flow">
+      <div class="strip">
+        <span class="strip-label">Money flow</span>
+        <span class="strip-addr mono" id="flow-addr">no address selected</span>
+        <span class="spacer"></span>
+        <label>hops <input id="g-hops" type="number" min="1" max="4" value="2" class="numin"></label>
+        <label>cap <input id="g-cap" type="number" min="20" max="500" step="20" value="160" class="numin"></label>
+        <button class="btn" id="g-fit">Fit</button>
+        <span class="exitcount" id="exit-count"></span>
+      </div>
+      <div class="exitbar" id="exitbar" hidden></div>
+      <div class="plot">
+        <canvas id="cv"></canvas>
+        <div class="plot-empty" id="plot-empty">Open an address from Triage.</div>
+        <div class="hover" id="hover" hidden></div>
+        <div class="plot-note" id="plot-note"></div>
+      </div>
+      <div class="key">
+        <span><i class="sw seed"></i>selected</span>
+        <span><i class="sw t3"></i>score ≥ 0.7</span>
+        <span><i class="sw t2"></i>0.4 – 0.7</span>
+        <span><i class="sw t1"></i>below 0.4</span>
+        <span><i class="sw exit"></i>exit point (square)</span>
+        <span class="key-note">Arrows follow the money. Thickness is value. Drag to pan, scroll to zoom.</span>
+      </div>
+    </div>
+
+    <!-- ================================================== TRACE -->
+    <div class="screen" id="s-trace">
+      <div class="strip">
+        <span class="strip-label">Trace to endpoint</span>
+        <span class="strip-addr mono" id="trace-addr">no address selected</span>
+        <span class="spacer"></span>
+        <label>hops <input id="t-hops" type="number" min="1" max="20" value="6" class="numin"></label>
+        <label>budget <input id="t-budget" type="number" min="10" max="400" step="10" value="80" class="numin"></label>
+        <button class="btn accent" id="t-run">Run trace</button>
+      </div>
+      <div class="pane" id="trace-out">
+        <p class="placeholder">Follows the money forward until it reaches an exchange, a
+          dormant wallet, or a mixer. Queries live explorers, so it takes a moment.</p>
+      </div>
+    </div>
+
+    <!-- ================================================== COHORTS -->
+    <div class="screen" id="s-cohorts">
+      <div class="strip"><span class="strip-label">Behavioural cohorts</span></div>
+      <div class="pane" id="cohorts-out"></div>
+    </div>
+
+    <!-- ================================================== SOURCES -->
+    <div class="screen" id="s-sources">
+      <div class="strip">
+        <span class="strip-label">Data source and window</span>
+        <span class="spacer"></span>
+        <button class="btn accent" id="src-save">Save</button>
+      </div>
+      <div class="pane" id="sources-out"></div>
+    </div>
+
+    <!-- ================================================== MODEL -->
+    <div class="screen" id="s-model">
+      <div class="strip">
+        <span class="strip-label">Model and data provenance</span>
+        <span class="spacer"></span>
+        <button class="btn" id="r-ingest">Pull chain data</button>
+        <button class="btn accent" id="r-train">Cluster + train</button>
+      </div>
+      <div class="pane" id="model-out"></div>
+      <div class="runlog" id="runlog" hidden></div>
+    </div>
+
+  </section>
+</main>
+
+<div id="snack" class="snack" hidden></div>
+
+<script src="plot.js"></script>
+<script src="console.js"></script>
+</body>
+</html>
