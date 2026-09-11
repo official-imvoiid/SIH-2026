@@ -244,6 +244,3 @@ n-by-n matrix, which is what makes a million-address window feasible at all.
 - Public explorers rate-limit. The client rotates providers and backs off, but a large
   first fetch takes time.
 
-## Licence
-
-MIT.
