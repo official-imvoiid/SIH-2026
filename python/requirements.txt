@@ -1,0 +1,25 @@
+# ChainTrace learning layer.
+#
+# Deliberately small. Every extra dependency is one more thing that can fail to install
+# on the machine where this has to be demonstrated, and none of the heavy options below
+# earn their weight on a dataset this size.
+
+numpy>=1.24
+scikit-learn>=1.3
+joblib>=1.3
+
+# ---------------------------------------------------------------------------------------
+# NOT required, and deliberately not used:
+#
+#   torch / torch-geometric   A deep graph network needs far more labelled data than a
+#                             ransomware investigation ever has, and on the public Elliptic
+#                             benchmark a random forest on hand-built features beats a
+#                             graph convolutional network outright (Weber et al. 2019,
+#                             roughly 0.79 against 0.65 illicit F1). The message-passing
+#                             model in gnn.py is written directly in numpy so the
+#                             comparison can be run honestly without a 2 GB install.
+#
+#   shap                      explain.py computes exact tree-path attributions, which for
+#                             a forest is the same quantity SHAP returns for this model
+#                             class, with no extra dependency.
+# ---------------------------------------------------------------------------------------
