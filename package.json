@@ -1,0 +1,35 @@
+{
+  "name": "chaintrace",
+  "version": "1.0.0",
+  "description": "AI-powered monitoring and analysis of Bitcoin transaction traffic",
+  "main": "electron/main.js",
+  "author": "ChainTrace",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "serve": "node src/server/app.js",
+    "ingest": "node scripts/ingest.js --days 2",
+    "analyse": "python python/pipeline.py",
+    "trace": "node scripts/trace.js"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  },
+  "devDependencies": {
+    "electron": "^32.0.0"
+  },
+  "build": {
+    "appId": "org.chaintrace.app",
+    "files": [
+      "electron/**",
+      "src/**",
+      "ui/**",
+      "python/**",
+      "scripts/**",
+      "package.json"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
